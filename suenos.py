@@ -80,10 +80,8 @@ ESTRUCTURA DE RESPUESTA:
 [Da un consejo espiritual enfocado en la paz interior o el desapego]
 """
 
-# 4. CONFIGURACIÓN DE LA BARRA LATERAL
-with st.sidebar:
-    st.header("Configuración")
-    api_key = st.text_input("Gemini API Key:", type="password")
+# 4. CONFIGURACIÓN DE LA API (Oculta al público)
+api_key = st.secrets["GEMINI_API_KEY"]
 
 # 5. FORMULARIO DE ENTRADA
 relato = st.text_area("¿Qué soñaste?", placeholder="Narra aquí tu sueño...", height=150)
