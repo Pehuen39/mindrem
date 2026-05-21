@@ -1,5 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
+from datetime import datetime
 
 # 1. Configuración de la página
 st.set_page_config(
@@ -7,6 +8,44 @@ st.set_page_config(
     page_icon="🧠",
     layout="centered"
 )
+# ==========================================
+# CÓDIGO DEL CANDADO (AUTOMÁTICO)
+# ==========================================
+FECHA_BLOQUEO = datetime(2026, 6, 10) 
+fecha_actual = datetime.now()
+
+CODIGOS_AUTORIZADOS = [
+    "PEHUEN100",   # Tu código maestro para entrar vos siempre
+    "JUAN_SUENOS", 
+    "MARIA_VEDICA"
+]
+
+# Poné tu número real: país (54) + 9 + área sin el 0 + número sin el 15
+NUMERO_CELULAR = "5492994225756"  
+
+MENSAJE_WA = "Hola Pehuen! Ya te hice la transferencia. Quiero mi código de acceso individual para la app de sueños 🌙"
+LINK_WHATSAPP = f"https://wa.me/{NUMERO_CELULAR}?text={MENSAJE_WA.replace(' ', '%20')}"
+
+if fecha_actual > FECHA_BLOQUEO:
+    st.error("🌙 El portal gratuito ha completado su viaje.")
+    st.write(
+        "Tras unos días de exploración, el acceso libre ha finalizado. "
+        "Para mantener los servidores activos y seguir descifrando el mensaje oculto "
+        "de tus sueños con el análisis védico, te invitamos a activar tu pase mensual."
+    )
+    st.info("☕ **Valor:** 1 Cafecito ($4.000 ARS / $3 USD)")
+    st.link_button("👉 Haz clic aquí para activar tu acceso por WhatsApp", LINK_WHATSAPP)
+    st.write("---")
+    
+    codigo_ingresado = st.text_input("Introduce tu Código de Acceso Individual:", type="password")
+    
+    if codigo_ingresado in CODIGOS_AUTORIZADOS:
+        st.success("¡Código validado! Bienvenido de nuevo.")
+    else:
+        if codigo_ingresado != "":
+            st.error("Código incorrecto o vencido. Por favor, verifica o solicita uno nuevo.")
+        st.stop() # <-- Esto frena la app si no hay pago
+# ==========================================
 
 # REFUERZO DE LEGIBILIDAD: CSS para hacer las letras súper negras y visibles
 st.markdown("""
